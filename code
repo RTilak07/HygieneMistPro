@@ -1,0 +1,22 @@
+// Pin definitions
+int irSensor = 2;     // IR sensor output pin
+int motorPin = 9;    // Motor control pin (via relay or transistor)
+
+void setup() {
+  pinMode(irSensor, INPUT);
+  pinMode(motorPin, OUTPUT);
+
+  digitalWrite(motorPin, LOW); // Motor OFF initially
+}
+
+void loop() {
+  int sensorValue = digitalRead(irSensor);
+
+  // If hand is detected
+  if (sensorValue == LOW) {   // LOW for most IR sensors
+    digitalWrite(motorPin, HIGH); // Motor ON
+    delay(800);                    // Spray duration
+    digitalWrite(motorPin, LOW);  // Motor OFF
+    delay(1000);                  // Small delay to avoid repeat
+  }
+}
